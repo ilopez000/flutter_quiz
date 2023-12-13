@@ -50,7 +50,7 @@ List<Map<String, Object>> questions = [
               // Lógica para reiniciar el quiz
             },
           ),
-          FlatButton(
+          ElevatedButton(
             child: Text('Salir'),
             onPressed: () {
               Navigator.of(context).pop(); // Cierra el diálogo
