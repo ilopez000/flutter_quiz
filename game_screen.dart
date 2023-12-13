@@ -8,7 +8,7 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   int currentQuestionIndex = 0;
   int score = 0;
-List<Map<String, Object>> questions = [
+  List<Map<String, Object>> questions = [
     {
       'questionText': '¿En qué curso estás matriculado?',
       'answers': ['DAM1', 'Dam2', 'No lo sé', 'No me importa'],
@@ -26,7 +26,7 @@ List<Map<String, Object>> questions = [
     if (selectedIndex == questions[currentQuestionIndex]['correct']) {
       setState(() {
         score++;
-      });  
+      });
     }
 
     if (currentQuestionIndex < questions.length - 1) {
@@ -46,7 +46,7 @@ List<Map<String, Object>> questions = [
         title: Text('Fin del Quiz'),
         content: Text('Tu puntuación es: $score/${questions.length}'),
         actions: <Widget>[
-          FlatButton(
+          ElevatedButton(
             child: Text('Reiniciar'),
             onPressed: () {
               // Lógica para reiniciar el quiz
