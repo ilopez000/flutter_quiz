@@ -8,13 +8,18 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   int currentQuestionIndex = 0;
   int score = 0;
-  List<Map<String, Object>> questions = [
+List<Map<String, Object>> questions = [
     {
-      'questionText': '¿Cuál es tu color favorito?',
-      'answers': ['Rojo', 'Verde', 'Azul', 'Amarillo'],
-      'correctIndex': 1,
+      'questionText': '¿En qué curso estás matriculado?',
+      'answers': ['DAM1', 'Dam2', 'No lo sé', 'No me importa'],
+      'correct': 1,
+
     },
-    // Agrega más preguntas aquí
+    {
+      'questionText': '¿Qué piensas regalar al profe de MP08?',
+      'answers': ['Sesiones de Psicoterapia','Nada','Ansiolíticos','Antedepresivos' ],
+      'correct': 1,
+    }
   ];
 
   void answerQuestion(int selectedIndex) {
