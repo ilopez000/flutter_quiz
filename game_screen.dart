@@ -23,7 +23,7 @@ List<Map<String, Object>> questions = [
   ];
 
   void answerQuestion(int selectedIndex) {
-    if (selectedIndex == questions[currentQuestionIndex]['correctIndex']) {
+    if (selectedIndex == questions[currentQuestionIndex]['correct']) {
       score++;
     }
 
