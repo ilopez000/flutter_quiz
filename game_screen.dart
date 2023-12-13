@@ -24,7 +24,9 @@ List<Map<String, Object>> questions = [
 
   void answerQuestion(int selectedIndex) {
     if (selectedIndex == questions[currentQuestionIndex]['correct']) {
-      score++;
+      setState(() {
+        score++;
+      });  
     }
 
     if (currentQuestionIndex < questions.length - 1) {
