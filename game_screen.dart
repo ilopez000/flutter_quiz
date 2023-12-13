@@ -7,18 +7,54 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   int currentQuestionIndex = 0;
+  int score = 0;
   List<Map<String, Object>> questions = [
     {
       'questionText': '¿Cuál es tu color favorito?',
       'answers': ['Rojo', 'Verde', 'Azul', 'Amarillo'],
+      'correctIndex': 1,
     },
     // Agrega más preguntas aquí
   ];
 
-  void answerQuestion() {
-    setState(() {
-      currentQuestionIndex++;
-    });
+  void answerQuestion(int selectedIndex) {
+    if (selectedIndex == questions[currentQuestionIndex]['correctIndex']) {
+      score++;
+    }
+
+    if (currentQuestionIndex < questions.length - 1) {
+      setState(() {
+        currentQuestionIndex++;
+      });
+    } else {
+      // No incrementar más y mostrar resultados
+      _showScoreDialog();
+    }
+  }
+
+  void _showScoreDialog() {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Fin del Quiz'),
+        content: Text('Tu puntuación es: $score/${questions.length}'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Reiniciar'),
+            onPressed: () {
+              // Lógica para reiniciar el quiz
+            },
+          ),
+          FlatButton(
+            child: Text('Salir'),
+            onPressed: () {
+              Navigator.of(context).pop(); // Cierra el diálogo
+              Navigator.of(context).pop(); // Vuelve a la pantalla anterior
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -28,8 +64,7 @@ class _GameScreenState extends State<GameScreen> {
         title: Text('Quiz'),
         backgroundColor: Colors.deepPurple,
       ),
-      body: currentQuestionIndex < questions.length
-          ? Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
@@ -55,36 +90,13 @@ class _GameScreenState extends State<GameScreen> {
                       (questions[currentQuestionIndex]['answers'] as List<String>)[index],
                       style: TextStyle(fontSize: 18),
                     ),
-                    onPressed: answerQuestion,
+                    onPressed: () => answerQuestion(index),
                   ),
                 );
               },
             ),
           ),
         ],
-      )
-          : Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '¡Felicidades, has terminado el quiz!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              child: Text('Volver a empezar'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.orange,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-              ),
-              onPressed: () {
-                // Lógica para reiniciar el quiz
-              },
-            ),
-          ],
-        ),
       ),
     );
   }
